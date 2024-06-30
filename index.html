@@ -23,7 +23,7 @@
      <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">Conheça nosso menu</h2>
     <!--Menu-->
      <div id="menu">
-         <main class="grid grid-cols-1 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-20">
+         <main class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
             
                 <!--Produto ITEM-->
                 <div class="flex gap-2">
@@ -34,8 +34,11 @@
                         <p class=" font-bold">Hamburguer Smash</p>
                         <p class="text-sm">Pão,tomate,queijo, carne e alface </p>
                         <div class="flex justify-center gap-2 justify-between">
-                        <p class="font-bold text-lg">R$18,99</p>
-                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn">
+                        <p class="font-bold text-lg">R$18,90</p>
+                        <button class="bg-gray-900 px-5 rounded add-to-cart-btn"
+                        data-name="Hamburguer Smash"
+                        data-price="18,90"
+                        >
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
                     </div>
@@ -46,7 +49,7 @@
 
             <!--Produto ITEM-->
             <div class="flex gap-2">
-                <img src="./assets/hamb-2.png" alt="Hamburguer Smash" class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300 "/>
+                <img src="./assets/hamb-2.png" alt="Big Burguer" class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300 "/>
             
             
                 <div>
@@ -54,13 +57,34 @@
                     <p class="text-sm">Pão,tomate,queijo, carne e alface </p>
                     <div class="flex justify-center gap-2 justify-between">
                     <p class="font-bold text-lg">R$32,90</p>
-                    <button class="bg-gray-900 px-5 rounded add-to-cart-btn">
+                    <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Big Burguer"
+                    data-price="32,90"
+                    >
                         <i class="fa fa-cart-plus text-lg text-white"></i>
                     </button>
                 </div>
             </div>
         </div>
         <!--Fim do produto, LEMBRAR DE CORRIGIR OS DIVS SE PRECISAR-->
+        <!--Produto ITEM-->
+        <div class="flex gap-2">
+            <img src="./assets/hamb-3.png" alt="Cheddar Burguer" class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300 "/>
+        
+        
+            <div>
+                <p class=" font-bold">Cheddar Burguer</p>
+                <p class="text-sm">Pão,tomate,queijo, carne e alface </p>
+                <div class="flex justify-center gap-2 justify-between">
+                <p class="font-bold text-lg">R$52,90</p>
+                <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Cheddar Burguer"
+                data-price="52,90"
+                >
+                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--Fim do produto, LEMBRAR DE CORRIGIR OS DIVS SE PRECISAR-->
          </main>
      </div>
      <!--Menu-->
