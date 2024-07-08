@@ -1,10 +1,12 @@
-//carrinho
+// abrir carrinho
 let screenHidden=document.getElementById('Modal')
 let btn_Screen=document.getElementById('button-cart')
 let cart=[];
 btn_Screen.addEventListener('click',function(){
     screenHidden.classList.remove('hidden');
         screenHidden.classList.add('flex');
+        updateCartModal()
+
 })
 //levar pro carrinho
 let addCart=document.querySelectorAll('.add-to-cart-btn')
@@ -44,13 +46,41 @@ function addToCart(name,price){
     const ExistingItem=cart.find(item=>item.name===name)
     if(ExistingItem){
     ExistingItem.quantity+=1
-    return
-    }  
+    
+    } else{
         cart.push({
             name,
             price,
             quantity: 1,
         });
-        
     }
+    updateCartModal()
+    }
+    //registro dos pedidos
+let reg=document.getElementById('cart-items')
+function updateCartModal(){
+reg.innerHTML=''
+let total=0
 
+cart.forEach(item=>{
+    const carItemsContainer=document.createElement('div')
+
+    carItemsContainer.innerHTML=` <div>
+    <div>
+    <p>${item.name}</p>
+    <p>${item.quantity}</p>
+    <p>${item.price}</p>
+    </div>
+
+    <div>
+    <button>
+    Remover
+    </button>
+    </div>
+    </div>`  
+    
+    reg.appendChild(carItemsContainer)
+
+})
+} 
+ 
