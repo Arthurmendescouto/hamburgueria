@@ -64,23 +64,48 @@ let total=0
 
 cart.forEach(item=>{
     const carItemsContainer=document.createElement('div')
+    carItemsContainer.classList.add('flex','justify-between','mb-4','flex-col')
 
     carItemsContainer.innerHTML=` <div>
-    <div>
-    <p>${item.name}</p>
-    <p>${item.quantity}</p>
+    <div class='flex items-center  justify-between' >
+    <p class='font-medium'>${item.name}</p>
+    <p>Qtd: ${item.quantity}</p>
     <p>${item.price}</p>
     </div>
 
     <div>
-    <button>
+    <button class='remove-from-cart-btn ' data-name="${item.name}">
     Remover
     </button>
-    </div>
+    </div> 
     </div>`  
-    
+    total+=item.price*item.quantity
     reg.appendChild(carItemsContainer)
 
+
+    carItemsContainer.addEventListener('click',function(event){
+        if(event.target.classList.contains('remove-from-cart-btn')){
+            const name=event.target.getAttribute('data-name')
+            
+            removeItemCart(name)
+        }
+        })
 })
+
 } 
+//função para remover o item do carrinho
+function removeItemCart(name){
+    const index=cart.findIndex(item =>item.name===name)
+    if(index!==-1){
+        const item=cart[index]
+        if(item.quantity>1){
+            item.quantity-=1
+            updateCartModal()
+            return
+        }
+        cart.splice(index,1)
+        updateCartModal()
+    }
+   }
+  
  
