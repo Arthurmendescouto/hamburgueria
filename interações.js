@@ -1,6 +1,7 @@
 // abrir carrinho
 let screenHidden=document.getElementById('Modal')
 let btn_Screen=document.getElementById('button-cart')
+let cartTot=document.getElementById('cart-total')
 let cart=[];
 btn_Screen.addEventListener('click',function(){
     screenHidden.classList.remove('hidden');
@@ -11,7 +12,6 @@ btn_Screen.addEventListener('click',function(){
 //levar pro carrinho
 let addCart=document.querySelectorAll('.add-to-cart-btn')
 let numberCart=document.getElementById('cart-count')
-let cont=0
 addCart.forEach(function (e){
 e.addEventListener('click',function(event){
     
@@ -21,8 +21,6 @@ e.addEventListener('click',function(event){
         let price=parseFloat(parentButton.getAttribute('data-price'))
         addToCart(name,price)
     }
-    cont++
-    numberCart.innerHTML=`(${cont})`
 })
 })
 //fechar
@@ -55,6 +53,7 @@ function addToCart(name,price){
         });
     }
     updateCartModal()
+    updateCartCount()
     }
     //registro dos pedidos
 let reg=document.getElementById('cart-items')
@@ -64,24 +63,25 @@ let total=0
 
 cart.forEach(item=>{
     const carItemsContainer=document.createElement('div')
-    carItemsContainer.classList.add('flex','justify-between','mb-4','flex-col')
+    carItemsContainer.classList.add('mb-4')
 
-    carItemsContainer.innerHTML=` <div>
-    <div class='flex items-center  justify-between' >
-    <p class='font-medium'>${item.name}</p>
-    <p>Qtd: ${item.quantity}</p>
-    <p>${item.price}</p>
-    </div>
-
+    carItemsContainer.innerHTML=`
+    <div class='flex items-center  justify-between'>
     <div>
+    <p class='font-medium'>${item.name}</p>
+    <p> Qtd:${item.quantity}</p>
+    <p class='font-medium mt-2'>R$ ${item.price}</p>
+    </div>
     <button class='remove-from-cart-btn ' data-name="${item.name}">
     Remover
     </button>
-    </div> 
     </div>`  
     total+=item.price*item.quantity
     reg.appendChild(carItemsContainer)
-
+    cartTot.textContent=total.toLocaleString('pt-BR',{
+        style:'currency',
+        currency:'BRL'
+    })
 
     carItemsContainer.addEventListener('click',function(event){
         if(event.target.classList.contains('remove-from-cart-btn')){
@@ -99,12 +99,22 @@ function removeItemCart(name){
     if(index!==-1){
         const item=cart[index]
         if(item.quantity>1){
-            item.quantity-=1
-            updateCartModal()
-            return
+            item.quantity-=1 
+        }else{
+            cart.splice(index,1)
         }
-        cart.splice(index,1)
+        
         updateCartModal()
+        updateCartCount()
+    }
+   }
+   function updateCartCount(){
+    const totalItems =cart.reduce((total,item)=>total+item.quantity,0)
+    
+    if(totalItems===0){
+        numberCart.innerHTML=' '
+    }else{
+        numberCart.innerHTML=`(${totalItems })`
     }
    }
   
