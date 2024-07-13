@@ -2,6 +2,8 @@
 let screenHidden=document.getElementById('Modal')
 let btn_Screen=document.getElementById('button-cart')
 let cartTot=document.getElementById('cart-total')
+let adressInput=document.getElementById('adress')
+let checkoutBtn=document.getElementById('finish')
 let cart=[];
 btn_Screen.addEventListener('click',function(){
     screenHidden.classList.remove('hidden');
@@ -117,5 +119,8 @@ function removeItemCart(name){
         numberCart.innerHTML=`(${totalItems })`
     }
    }
-  
- 
+  adressInput.addEventListener('input',function(e){
+    let inputValue=e.target.value
+
+  })
+ checkoutBtn.addEventListener
