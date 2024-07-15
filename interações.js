@@ -4,6 +4,9 @@ let btn_Screen=document.getElementById('button-cart')
 let cartTot=document.getElementById('cart-total')
 let adressInput=document.getElementById('adress')
 let checkoutBtn=document.getElementById('finish')
+let adressworn=document.querySelector('#conceal')
+const IsOpen=checkoutBtnRestaurantOpen()
+
 let cart=[];
 btn_Screen.addEventListener('click',function(){
     screenHidden.classList.remove('hidden');
@@ -119,8 +122,45 @@ function removeItemCart(name){
         numberCart.innerHTML=`(${totalItems })`
     }
    }
+
+   //enviar endereço
   adressInput.addEventListener('input',function(e){
     let inputValue=e.target.value
-
+    if(adressInput.value !=''){
+        adressworn.classList.add('hidden')
+        adressInput.classList.remove('border-red-600')
+    }
+        
   })
- checkoutBtn.addEventListener
+ checkoutBtn.addEventListener('click',function(){
+    if(!IsOpen){
+        alert('LANCHONETE FECHADA')
+    }
+    if(cart.length===0) return
+    if(adressInput.value===''){
+        adressworn.classList.remove('hidden')
+        adressInput.classList.add('border-red-600')
+        return
+    }
+    //enviar api whats
+    const cartItems=cart.map((item)=>{
+        return (
+            `${item.name} Quantidade: ${item.quantity} Preço: R$${item.price}`
+        )
+    })
+    console.log(cartItems)
+ })
+ function checkoutBtnRestaurantOpen(){
+    const data=new Date()
+    const hora=data.getHours()
+    return hora>=18 && hora<24
+ }
+ const spanItem=document.getElementById('date-span')
+//const corrigir isopen
+if(IsOpen){
+    spanItem.classList.remove('bg-red-500')
+    spanItem.classList.add('bg-green-600')
+}else{
+    spanItem.classList.add('bg-red-500')
+    spanItem.classList.remove('bg-green-600')
+}
