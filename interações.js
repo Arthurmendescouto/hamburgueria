@@ -132,10 +132,21 @@ function removeItemCart(name){
     }
         
   })
+  //finalizar pedido
  checkoutBtn.addEventListener('click',function(){
     if(!IsOpen){
-        alert('LANCHONETE FECHADA')
-    }
+        Toastify({
+            text: "O restaurante está fechado",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "#ef4444",
+            },
+    }).showToast()
+    return}
     if(cart.length===0) return
     if(adressInput.value===''){
         adressworn.classList.remove('hidden')
@@ -147,13 +158,18 @@ function removeItemCart(name){
         return (
             `${item.name} Quantidade: ${item.quantity} Preço: R$${item.price}`
         )
-    })
-    console.log(cartItems)
+
+    }).join("\n")
+    const message=encodeURIComponent(`${cartItems}\nEndereço: ${adressInput.value}`)
+    const phone='7382314739'
+    window.open(`https://wa.me/${phone}?text=${message}`,"_blank")
+    cart=[]
+    updateCartModal()
  })
  function checkoutBtnRestaurantOpen(){
     const data=new Date()
     const hora=data.getHours()
-    return hora>=18 && hora<24
+    return hora>=18 && hora<22
  }
  const spanItem=document.getElementById('date-span')
 //const corrigir isopen
