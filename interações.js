@@ -172,7 +172,7 @@ function removeItemCart(name){
     return hora>=18 && hora<22
  }
  const spanItem=document.getElementById('date-span')
-//const corrigir isopen
+//const corrigir isOpen
 if(IsOpen){
     spanItem.classList.remove('bg-red-500')
     spanItem.classList.add('bg-green-600')
